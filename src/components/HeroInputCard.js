@@ -104,11 +104,6 @@ const HeroInputCard = props=>{
                 <div className="toast-div">
                 {error.show && <Toast onClose={() => setError({show:false, msg:""})} show={error.show} delay={3000} autohide>
                     <Toast.Header>
-                    <img
-                        src="holder.js/20x20?text=%20"
-                        className="rounded me-2"
-                        alt=""
-                    />
                     <strong className="me-auto">{error.msg}</strong>
                     <small></small>
                     </Toast.Header>

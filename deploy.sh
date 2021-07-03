@@ -4,7 +4,7 @@ read -p "Comments : " comments
 # git init
 git stage .
 git add .
-git commit -m "${comments} -script-deploy"
+git commit -m "${comments} -script-deploy" 
 # git remote add origin https://github.com/ombahiwal/igne-demo
-git push origin master
+git push origin master --force
 echo "Deployment Success! ${comments}"

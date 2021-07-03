@@ -60,10 +60,9 @@ export default class CarouselResponsive extends Component {
         <Slider ref={c => (this.slider = c)}  {...settings}>
           {this.props.imagePaths.map((src, idx)=>{
             return  <div key={idx}>
-                         <img className="carousel-image" alt="carousel slider image "src={src}/>
+                         <img className="carousel-image" alt={"carousel slider image "+idx}src={src}/>
                     </div>
             })}
-          
         </Slider>
         </center>
         </div>

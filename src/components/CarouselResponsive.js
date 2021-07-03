@@ -36,7 +36,7 @@ export default class CarouselResponsive extends Component {
           }
         },
         {
-          breakpoint: 600,
+          breakpoint: 960,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
@@ -44,7 +44,7 @@ export default class CarouselResponsive extends Component {
           }
         },
         {
-          breakpoint: 480,
+          breakpoint: 680,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1
@@ -53,6 +53,7 @@ export default class CarouselResponsive extends Component {
       ]
     };
     return (
+
       <div className="slider-wrapper">
            <div className="carousel-arrow"><RiArrowLeftSLine onClick={this.previous}/></div>
           <div className="container-slider">
@@ -68,6 +69,7 @@ export default class CarouselResponsive extends Component {
         </div>
         <div className="carousel-arrow2"><RiArrowRightSLine onClick={this.next}/></div>        
       </div>
+
     );
   }
 }

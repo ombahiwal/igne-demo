@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import {Image} from 'react-bootstrap';
-import {Container, Row, Col} from 'react-bootstrap';
 import {RiArrowLeftSLine, RiArrowRightSLine} from 'react-icons/ri';
-import sampleImage from './sample.png';
 
 export default class CarouselResponsive extends Component {
     constructor(props) {
@@ -63,33 +60,10 @@ export default class CarouselResponsive extends Component {
         <Slider ref={c => (this.slider = c)}  {...settings}>
           {this.props.imagePaths.map((src, idx)=>{
             return  <div key={idx}>
-                         <img className="carousel-image" src={src}/>
+                         <img className="carousel-image" alt="carousel slider image "src={src}/>
                     </div>
             })}
-          <div>
-            <img className="carousel-image" src={sampleImage}/>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
+          
         </Slider>
         </center>
         </div>

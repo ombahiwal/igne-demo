@@ -4,40 +4,56 @@ import './hero.scss';
 import _ from 'lodash';
 import getFormData from 'get-form-data';
 import SearchUtils from '../utils/search-utils';
-const HeroImage = props=>{
+const HeroInputCard = props=>{
     // Intialize vehicle info and labels
     const [vehicle_info, setVehicleInfo] = useState([{label:"Trade Name", value:"-"}, {label:"Date of first admission", value:"-"}, {label:"Fuel description", value:"-"}]);
-    // Flags for loading and error
-    const [error, setError] = useState({show:true, msg:""});
-    const [loading, setLoading] = useState(false);
+    // Flags for load and error
+    const [error, setError] = useState({show:false, msg:""});
+    const [loading, setLoading] = useState(false); 
+    const [input_val, setInputVal] = useState(""); // for real time input validation
+    
+    // validate input vehicle number before sending
     function validate_num_string(num_str){
-        // validate input vehicle number
+        // ToDo : change to regex
+        return (num_str.split("-").length <= 3 && num_str.length <=10 && num_str.length >=5) ? num_str.replace(/-/g, "") : false;
     }
     async function fetchData(e){
         e.preventDefault();
-        setLoading(true);
-        // return ;
-        let form = document.querySelector('#vehicle-plate-form');
-        let form_data = getFormData(form);
-        console.log(form_data.vehicle_number_plate, /^B[A-Z0-9]{2}-[0-9A-Z]{3}$/.test(form_data.vehicle_number_plate));
-        setLoading(false);
-        return;
-        await SearchUtils.fetchVehicleInfo(form_data.vehicle_number_plate).then((response) => {
-            console.log('response from our api',response.data);
-            if(response.data.kentekenplaat){
-                var data = response.data;
-                // "2013-11-26"
-                setVehicleInfo([{label:"Trade Name", value:_.startCase(_.toLower(data.handelsbenaming))}, {label:"Date of first admission", value:data.datum_eerste_toelating.split("-").reverse().join("-")}, {label:"Fuel description", value:data.brandstof[0]["brandstof_omschrijving"]}])
-                setLoading(false);
-            }else{
+        try{
+            setLoading(true);
+            // return ;
+            let form = document.querySelector('#vehicle-plate-form');
+            let form_data = getFormData(form);
+            // check the format
+
+            if(validate_num_string(form_data.vehicle_number_plate)){
+                await SearchUtils.fetchVehicleInfo(validate_num_string(form_data.vehicle_number_plate)).then((response) => {
+                    console.log('response from our api',response.data);
+                    if(response.data.kentekenplaat){
+                        var data = response.data;
+                        // "2013-11-26"
+                        setVehicleInfo([{label:"Trade Name", value:_.startCase(_.toLower(data.handelsbenaming))}, {label:"Date of first admission", value:data.datum_eerste_toelating.split("-").reverse().join("-")}, {label:"Fuel description", value:data.brandstof[0]["brandstof_omschrijving"]}])
+                        setLoading(false);
+                    }else{
+                        setError({show:true, msg:"Some Error Occured"});
+                        setLoading(false);
+                    }
+                })
+                .catch((error) => {
+                    setError({show:true, msg:"Invalid number"});
+                    setLoading(false);    
+                });
                 
+            }else{
+                    setError({show:true, msg:"Invalid number"});
+                    setLoading(false);
+                return  
             }
-          })
-          .catch((error) => {
-              setError({show:true, msg:"Invalid number"});
-              setLoading(false);    
-          });
-          
+        }catch(e){
+            setError({show:true, msg:"Invalid number"});
+            setLoading(false);    
+        }
+      
     }
     return (
         <div className="wrapper-top">
@@ -49,12 +65,14 @@ const HeroImage = props=>{
                 <Form id="vehicle-plate-form"onSubmit={fetchData}>
                     <InputGroup size="small" >
                             <FormControl
-                            name="vehicle_number_plate"
-                            size="small"
-                            className="number-plate-input"
-                            placeholder="6-XXH-68"
-                            aria-describedby="basic-addon1"
-                            disabled={loading}
+                                value={input_val}
+                                onChange={(e)=>{if(e.target.value.length <=10) setInputVal(e.target.value.toUpperCase().replace(/[^\w-]/gi, ""))}}
+                                name="vehicle_number_plate"
+                                size="small"
+                                className="number-plate-input"
+                                placeholder="6-XXH-68"
+                                aria-describedby="basic-addon1"
+                                disabled={loading}
                         />
                         <InputGroup.Append>
                             <Button type="submit" size="small" disabled={loading}>
@@ -102,5 +120,5 @@ const HeroImage = props=>{
     );
 }
 
-export default HeroImage;
+export default HeroInputCard;
 

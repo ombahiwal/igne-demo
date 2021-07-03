@@ -2,12 +2,14 @@ import './App.scss';
 // french pattern="^([A-HJ-NP-TV-Z]{2}|[0-9]{3,4})-?([A-HJ-NP-TV-Z]{2,3}|[0-9]{3})-?([A-HJ-NP-TV-Z]{2}|[0-9]{2})$"
 
 import {useEffect} from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
-import HeroImage from './components/HeroImage';
+import HeroInputCard from './components/HeroInputCard';
 import CarouselResponsive from './components/CarouselResponsive';
-
+import img1 from './components/sample_images/image1.jpg'
+import img2 from './components/sample_images/image2.jpg'
+import img3 from './components/sample_images/image3.jpg'
+import img4 from './components/sample_images/image4.jpg'
 function App() {
-  const carousel_image_paths = ['./sample.png']
+  const carousel_image_paths = [img1, img2, img3, img4];
   useEffect(()=>{
   }, []);
 
@@ -16,8 +18,7 @@ function App() {
       <header className="App-header">
       {/* <b className="App-title">License Plate</b> */}
       </header>
-      <HeroImage/>    
-        
+      <HeroInputCard/>            
           <center>
             <CarouselResponsive imagePaths={carousel_image_paths}/>  
             </center>

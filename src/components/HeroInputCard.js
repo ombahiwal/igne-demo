@@ -1,12 +1,14 @@
 import React, { useState } from 'react'; 
-import {InputGroup, Button, FormControl, Form, Spinner, Toast} from 'react-bootstrap';
 import './hero.scss';
+import {InputGroup, Button, FormControl, Form, Spinner, Toast} from 'react-bootstrap';
 import _ from 'lodash';
 import getFormData from 'get-form-data';
 import SearchUtils from '../utils/search-utils';
+
+
 const HeroInputCard = props=>{
     // Intialize vehicle info and labels
-    const [vehicle_info, setVehicleInfo] = useState([{label:"Trade Name", value:"-"}, {label:"Date of first admission", value:"-"}, {label:"Fuel description", value:"-"}]);
+    const [vehicle_info, setVehicleInfo] = useState([{label:"Trade name", value:"-"}, {label:"Date of first admission", value:"-"}, {label:"Fuel description", value:"-"}]);
     // Flags for load and error
     const [error, setError] = useState({show:false, msg:""});
     const [loading, setLoading] = useState(false); 
@@ -112,7 +114,6 @@ const HeroInputCard = props=>{
                     <strong className="me-auto">{error.msg}</strong>
                     <small></small>
                     </Toast.Header>
-                    {/* <Toast.Body>{error.msg}</Toast.Body> */}
                 </Toast>}
                 </div>
         </div>
@@ -121,4 +122,6 @@ const HeroInputCard = props=>{
 }
 
 export default HeroInputCard;
+
+// french pattern="^([A-HJ-NP-TV-Z]{2}|[0-9]{3,4})-?([A-HJ-NP-TV-Z]{2,3}|[0-9]{3})-?([A-HJ-NP-TV-Z]{2}|[0-9]{2})$"
 

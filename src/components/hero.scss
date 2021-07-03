@@ -17,7 +17,7 @@ $input-yellow: rgb(244, 208, 110);
     width: 100%;
     color: white; 
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     margin-bottom: 15px;
   }
   .hero-text {
@@ -49,9 +49,10 @@ $input-yellow: rgb(244, 208, 110);
     color:black;
     background: $input-yellow;
     border: $input-yellow;
+    font-weight: 500;
     border-radius: 2px;
     text-align: center;
-    max-width: 115px;
+    max-width: 120px;
   }
   .number-plate-input:focus{
     background: $input-yellow;
@@ -92,14 +93,14 @@ $input-yellow: rgb(244, 208, 110);
     margin-bottom: 20px;
   }
   .vehicle-info-card-label{
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 400;
     color:black;
     margin: 2px;
   }
   
   .vehicle-info-card-value{
-    font-size: 1.45rem;
+    font-size: 1.5rem;
   }
   .toast-div{
     position: absolute;

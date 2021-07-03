@@ -23,17 +23,15 @@ const HeroInputCard = props=>{
         e.preventDefault();
         try{
             setLoading(true);
-            // return ;
+
             let form = document.querySelector('#vehicle-plate-form');
             let form_data = getFormData(form);
             // check the format
-
             if(validate_num_string(form_data.vehicle_number_plate)){
+                // make request
                 await SearchUtils.fetchVehicleInfo(validate_num_string(form_data.vehicle_number_plate)).then((response) => {
-                    console.log('response from our api',response.data);
                     if(response.data.kentekenplaat){
                         var data = response.data;
-                        // "2013-11-26"
                         setVehicleInfo([{label:"Trade Name", value:_.startCase(_.toLower(data.handelsbenaming))}, {label:"Date of first admission", value:data.datum_eerste_toelating.split("-").reverse().join("-")}, {label:"Fuel description", value:data.brandstof[0]["brandstof_omschrijving"]}])
                         setLoading(false);
                     }else{
